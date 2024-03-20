@@ -5,14 +5,12 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+ 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-         COMMIT_ID=$(git rev-parse --short=6 HEAD)
-         echo "commit od is V-${COMMIT_ID}
+         
+      echo  "::commitd is $(git rev-parse --short=6 HEAD) >> ${CIMMIT_ID}" 
 
     steps:
     - uses: actions/checkout@v3
