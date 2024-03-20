@@ -30,11 +30,11 @@ jobs:
           # docker push "$IMAGE_TAG"
           docker push razoropsrepocode/amazon:V-$COMMIT_ID
     - name: Run Trivy vulnerability scanner
+      run: |
+            COMMIT_ID=$(git rev-parse --short=6 HEAD)
+            echo "commit od is V-${COMMIT_ID}
       uses: aquasecurity/trivy-action@master
       with:
-          run: |
-              COMMIT_ID=$(git rev-parse --short=6 HEAD)
-              echo "commit od is V-${COMMIT_ID}
           image-ref: 'docker.io/razoropsrepocode/amazon:V-$COMMIT_ID'
           format: 'table'
           exit-code: '1'
