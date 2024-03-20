@@ -9,10 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
          
-      echo  "::commitd is $(git rev-parse --short=6 HEAD) >> ${CIMMIT_ID}" 
+     # echo  "::commitd is $(git rev-parse --short=6 HEAD) >> ${CIMMIT_ID}" 
 
     steps:
+    - name: set COMMIT_ID for ENV
+      run: COMMIT_ID=$(git rev-parse --short=6 HEAD) >> $GITHUB_ENV
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
@@ -30,7 +33,6 @@ jobs:
           # docker push "$IMAGE_TAG"
           docker push razoropsrepocode/amazon:V-$COMMIT_ID
     - name: Run Trivy vulnerability scanner
-     
       uses: aquasecurity/trivy-action@master
       with:
           image-ref: 'docker.io/razoropsrepocode/amazon:V-$COMMIT_ID'
