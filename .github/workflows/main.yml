@@ -44,7 +44,7 @@ jobs:
  
     - name: Build Docker Image
       run: |
-           docker buildx build -f .github/workflows/Dockerfile -t razoropsrepocode/amazon:${COMMIT_ID} .
+           docker build -t razoropsrepocode/amazon:${COMMIT_ID} .
     #                 \    --build-arg COMMIT_ID=${COMMIT_ID} \
     
       
