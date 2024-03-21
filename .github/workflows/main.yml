@@ -14,12 +14,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Build and push
+      uses: docker/build-push-action@v5
   
     - name: Build the Docker image
       run: |
         COMMIT-ID=$(git rev-parse --short=6 HEAD)
         echo "commit id is $COMMIT-ID"
-        #docker build -t razoropsrepocode/amazon:V-$COMMIT-ID . 
+        docker build -t razoropsrepocode/amazon:V-$COMMIT-ID . 
         
 #     # - name: Login to Docker Hub
 #     #   run: |
