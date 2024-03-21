@@ -22,7 +22,7 @@ jobs:
         COMMIT_ID=$(git rev-parse --short=6 HEAD)
         echo "commit id is $COMMIT_ID"
         docker build -t amazon . 
-        docker tag amazon razoropsrepocode/amazon:V-$COMMIT-ID
+      #  docker tag amazon razoropsrepocode/amazon:V-$COMMIT-ID
     - name: Login to Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
