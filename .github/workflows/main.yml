@@ -22,7 +22,9 @@ jobs:
 
     - name: Build Docker Image
       run: |
+           COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
            docker build -t razoropsrepocode/amazon:${COMMIT_ID} .
+      shell: bash
     # - name: commit id egenarator 
     #   run: |
     #     COMMIT-ID=$(git rev-parse --short=6 HEAD)
