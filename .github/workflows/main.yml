@@ -39,7 +39,7 @@ jobs:
           context: .
           file: .github/workflows/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/amazon:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/amazon:$COMMIT_ID
 
  
     # - name: Build Docker Image
