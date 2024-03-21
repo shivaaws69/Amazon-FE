@@ -17,7 +17,7 @@ jobs:
 
     - name: Set Commit ID
       run: |
-        echo "COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)" >> $GITHUB_ENV
+        echo COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
         echo "commit id is $COMMIT_ID"
     # - name: commit id egenarator 
     #   run: |
