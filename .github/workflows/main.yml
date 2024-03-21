@@ -15,7 +15,8 @@ jobs:
 
     steps:
     - name: set COMMIT_ID for ENV
-        echo "COMMIT-ID=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
+      run: echo "COMMIT-ID=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
+        commit id is $COMMIT-ID
     # - uses: actions/checkout@v3
     # - name: Build the Docker image
     #   run: |
