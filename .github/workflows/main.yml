@@ -21,25 +21,28 @@ jobs:
       run: |
         COMMIT_ID=$(git rev-parse --short=6 HEAD)
         echo "commit id is $COMMIT_ID"
-        docker build -t razoropsrepocode/amazon:V-${{ github.sha }} . 
+        docker build -t amazon . 
+        docker tag amazon razoropsrepocode/amazon:V-$COMMIT-ID
     - name: Login to Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-          image-ref: 'docker.io/razoropsrepocode/amazon:V-${{ github.sha }}'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-    
+         
     - name: Push Docker image
       run: |
           COMMIT_ID=$(git rev-parse --short=6 HEAD)
           # IMAGE_TAG="razoropsrepocode/amazon:V-${COMMIT_ID}"
           # docker push "$IMAGE_TAG"
           docker push razoropsrepocode/amazon:V-$COMMIT_ID
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+          image-ref: 'docker.io/razoropsrepocode/amazon:V-$COMMIT-ID'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+ 
     
