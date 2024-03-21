@@ -25,13 +25,13 @@ jobs:
       run: |
           # COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
            docker build -t razoropsrepocode/amazon:V-${COMMIT_ID} .
-           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-           docker push docker.io/razoropsrepocode/amazon:V-${COMMIT_ID}
+           #echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+           #docker push docker.io/razoropsrepocode/amazon:V-${COMMIT_ID}
       shell: bash
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-          image-ref: 'docker.io/razoropsrepocode/amazon:V-$COMMIT_ID'
+          image-ref: 'razoropsrepocode/amazon:V-${COMMIT_ID}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
