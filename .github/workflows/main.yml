@@ -1,8 +1,5 @@
 name: Docker Image build and push 
 
-env:
-  COMMIT-ID: hi
-
 on:
   push:
     branches: [ "main" ]
