@@ -30,12 +30,20 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    - name: Build Docker Image
-      run: |
-          docker buildx build -f .github/workflows/Dockerfile -t razoropsrepocode/amazon:${COMMIT_ID} 
-                    \    --build-arg COMMIT_ID=${COMMIT_ID} \
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/amazon:$COMMIT_ID
+
+    # - name: Set up Docker Buildx
+    #   uses: docker/setup-buildx-action@v3
+    # - name: Build Docker Image
+    #   run: |
+    #       docker buildx build -f .github/workflows/Dockerfile -t razoropsrepocode/amazon:${COMMIT_ID} 
+    #                 \    --build-arg COMMIT_ID=${COMMIT_ID} \
     
       
     # - name: Build and push
