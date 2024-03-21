@@ -32,7 +32,7 @@ jobs:
     - name: Build Docker Image
       run: |
           docker build -t docker.io/razoropsrepocode/amazon:${COMMIT_ID} 
-          #          \    --build-arg COMMIT_ID=${COMMIT_ID} \
+                    \    --build-arg COMMIT_ID=${COMMIT_ID} \
     
       
     # - name: Build and push
