@@ -15,13 +15,11 @@ jobs:
     # echo  "::commitd is $(git rev-parse --short=6 HEAD) >> ${CIMMIT_ID}" 
 
     steps:
-    - name: set COMMIT_ID for ENV
-      run: echo "COMMIT-ID=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
-        commit id is $COMMIT-ID
+  
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        COMMIT-ID=$(git rev-parse --short=6 HEAD)
+        COMMIT-ID=$(git rev-parse --short=6 HEAD) >> $GITHUB_ENV
         echo "commit id is $COMMIT-ID"
         docker build -t razoropsrepocode/amazon:V-$COMMIT-ID . 
         
