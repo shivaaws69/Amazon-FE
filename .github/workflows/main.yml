@@ -33,7 +33,7 @@ jobs:
           COMMIT_ID=$(git rev-parse --short=6 HEAD)
           # IMAGE_TAG="razoropsrepocode/amazon:V-${COMMIT_ID}"
           # docker push "$IMAGE_TAG"
-          docker push razoropsrepocode/amazon:V-$COMMIT_ID
+          docker push razoropsrepocode/amazon:V-$COMMIT-ID
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
