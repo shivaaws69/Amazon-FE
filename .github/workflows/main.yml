@@ -17,12 +17,13 @@ jobs:
 
     - name: Set Commit ID
       run: |
-        COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
-        echo "commit id is $COMMIT_ID"
+       # COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
+       echo "COMMIT_ID=${GITHUB_SHA::5}" >> $GITHUB_ENV
+       # echo "commit id is $COMMIT_ID"
 
     - name: Build Docker Image
       run: |
-           COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
+          # COMMIT_ID=$(echo $GITHUB_SHA | cut -c1-5)
            docker build -t razoropsrepocode/amazon:${COMMIT_ID} .
       shell: bash
     # - name: commit id egenarator 
