@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # echo  "::commitd is $(git rev-parse --short=6 HEAD) >> ${CIMMIT_ID}" 
+    
 
     steps:
   
@@ -20,29 +20,29 @@ jobs:
         echo "commit id is $COMMIT-ID"
         docker build -t razoropsrepocode/amazon:V-$COMMIT-ID . 
         
-    - name: Login to Docker Hub
-      run: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    # - name: Login to Docker Hub
+    #   run: |
+    #     docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
          
-    - name: Push Docker image
-      run: |
-         # COMMIT_ID=$(git rev-parse --short=6 HEAD)
-          # IMAGE_TAG="razoropsrepocode/amazon:V-${COMMIT-ID}"
-          # docker push "$IMAGE_TAG"
-          docker push razoropsrepocode/amazon:V-$COMMIT-ID
+    # - name: Push Docker image
+    #   run: |
+    #      # COMMIT_ID=$(git rev-parse --short=6 HEAD)
+    #       # IMAGE_TAG="razoropsrepocode/amazon:V-${COMMIT-ID}"
+    #       # docker push "$IMAGE_TAG"
+    #       docker push razoropsrepocode/amazon:V-$COMMIT-ID
 
-    - name: Run Trivy vulnerability scanner
-      run: COMMIT-ID=$(git rev-parse --short=6 HEAD)
-       echo "cpmmit id is $COMMIT-ID"
-    - name: trivyscan 
-      uses: aquasecurity/trivy-action@master 
-      with:
-          image-ref: "docker.io/razoropsrepocode/amazon:V-$COMMIT-ID"
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+    # - name: Run Trivy vulnerability scanner
+    #   run: COMMIT-ID=$(git rev-parse --short=6 HEAD)
+    #    echo "cpmmit id is $COMMIT-ID"
+    # - name: trivyscan 
+    #   uses: aquasecurity/trivy-action@master 
+    #   with:
+    #       image-ref: "docker.io/razoropsrepocode/amazon:V-$COMMIT-ID"
+    #       format: 'table'
+    #       exit-code: '1'
+    #       ignore-unfixed: true
+    #       vuln-type: 'os,library'
+    #       severity: 'CRITICAL,HIGH'
  
     
