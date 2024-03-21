@@ -39,7 +39,6 @@ jobs:
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
-    - name: Login to Docker Hub
         COMMIT-ID=$(git rev-parse --short=6 HEAD)
       with:
           image-ref: 'docker.io/razoropsrepocode/amazon:V-$COMMIT-ID'
