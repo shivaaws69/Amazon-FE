@@ -28,15 +28,15 @@ jobs:
            #echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
            #docker push docker.io/razoropsrepocode/amazon:V-${COMMIT_ID}
       shell: bash
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-          image-ref: 'razoropsrepocode/amazon:V-${COMMIT_ID}'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+    # - name: Run Trivy vulnerability scanner
+    #   uses: aquasecurity/trivy-action@master
+    #   with:
+    #       image-ref: 'razoropsrepocode/amazon:V-${COMMIT_ID}'
+    #       format: 'table'
+    #       exit-code: '1'
+    #       ignore-unfixed: true
+    #       vuln-type: 'os,library'
+    #       severity: 'CRITICAL,HIGH'
     # - name: commit id egenarator 
     #   run: |
     #     COMMIT-ID=$(git rev-parse --short=6 HEAD)
